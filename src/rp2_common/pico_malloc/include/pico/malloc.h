@@ -7,6 +7,8 @@
 #ifndef _PICO_MALLOC_H
 #define _PICO_MALLOC_H
 
+#include <malloc.h>
+
 /** \file malloc.h
 *  \defgroup pico_malloc pico_malloc
 *
@@ -34,5 +36,12 @@
 #ifndef PICO_DEBUG_MALLOC_LOW_WATER
 #define PICO_DEBUG_MALLOC_LOW_WATER 0
 #endif
+
+/**
+* \defgroup pico_malloc pico_malloc
+*
+* Returns malloc info.
+*/
+void pico_mallinfo(struct mallinfo *info);
 
 #endif

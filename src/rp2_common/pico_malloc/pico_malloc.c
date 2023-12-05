@@ -5,6 +5,7 @@
  */
 
 #include <stdlib.h>
+#include <malloc.h>
 #include "pico.h"
 #include "pico/malloc.h"
 
@@ -88,3 +89,14 @@ void WRAPPER_FUNC(free)(void *mem) {
     mutex_exit(&malloc_mutex);
 #endif
 }
+
+void pico_mallinfo(struct mallinfo *info) {
+#if PICO_USE_MALLOC_MUTEX
+    mutex_enter_blocking(&malloc_mutex);
+#endif
+    *info = mallinfo();
+#if PICO_USE_MALLOC_MUTEX
+    mutex_exit(&malloc_mutex);
+#endif
+}
+
